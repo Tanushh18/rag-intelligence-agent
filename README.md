@@ -1,101 +1,323 @@
-# LangGraph RAG Research Agent Template
+# RAG Intelligence Agent
 
-[![CI](https://github.com/langchain-ai/rag-research-agent-template/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/langchain-ai/rag-research-agent-template/actions/workflows/unit-tests.yml)
-[![Integration Tests](https://github.com/langchain-ai/rag-research-agent-template/actions/workflows/integration-tests.yml/badge.svg)](https://github.com/langchain-ai/rag-research-agent-template/actions/workflows/integration-tests.yml)
+A sophisticated Retrieval-Augmented Generation (RAG) intelligence agent built with LangGraph, enabling intelligent document indexing, retrieval, and context-aware response generation. This template provides a foundation for building enterprise-grade RAG systems with multi-graph architecture supporting complex research and analysis workflows.
 
-[![Open in - LangGraph Studio](https://img.shields.io/badge/Open_in-LangGraph_Studio-00324d.svg?logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4NS4zMzMiIGhlaWdodD0iODUuMzMzIiB2ZXJzaW9uPSIxLjAiIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHBhdGggZD0iTTEzIDcuOGMtNi4zIDMuMS03LjEgNi4zLTYuOCAyNS43LjQgMjQuNi4zIDI0LjUgMjUuOSAyNC41QzU3LjUgNTggNTggNTcuNSA1OCAzMi4zIDU4IDcuMyA1Ni43IDYgMzIgNmMtMTIuOCAwLTE2LjEuMy0xOSAxLjhtMzcuNiAxNi42YzIuOCAyLjggMy40IDQuMiAzLjQgNy42cy0uNiA0LjgtMy40IDcuNkw0Ny4yIDQzSDE2LjhsLTMuNC0zLjRjLTQuOC00LjgtNC44LTEwLjQgMC0xNS4ybDMuNC0zLjRoMzAuNHoiLz48cGF0aCBkPSJNMTguOSAyNS42Yy0xLjEgMS4zLTEgMS43LjQgMi41LjkuNiAxLjcgMS44IDEuNyAyLjcgMCAxIC43IDIuOCAxLjYgNC4xIDEuNCAxLjkgMS40IDIuNS4zIDMuMi0xIC42LS42LjkgMS40LjkgMS41IDAgMi43LS41IDIuNy0xIDAtLjYgMS4xLS44IDIuNi0uNGwyLjYuNy0xLjgtMi45Yy01LjktOS4zLTkuNC0xMi4zLTExLjUtOS44TTM5IDI2YzAgMS4xLS45IDIuNS0yIDMuMi0yLjQgMS41LTIuNiAzLjQtLjUgNC4yLjguMyAyIDEuNyAyLjUgMy4xLjYgMS41IDEuNCAyLjMgMiAyIDEuNS0uOSAxLjItMy41LS40LTMuNS0yLjEgMC0yLjgtMi44LS44LTMuMyAxLjYtLjQgMS42LS41IDAtLjYtMS4xLS4xLTEuNS0uNi0xLjItMS42LjctMS43IDMuMy0yLjEgMy41LS41LjEuNS4yIDEuNi4zIDIuMiAwIC43LjkgMS40IDEuOSAxLjYgMi4xLjQgMi4zLTIuMy4yLTMuMi0uOC0uMy0yLTEuNy0yLjUtMy4xLTEuMS0zLTMtMy4zLTMtLjUiLz48L3N2Zz4=)](https://langgraph-studio.vercel.app/templates/open?githubUrl=https://github.com/langchain-ai/rag-research-agent-template)
+## Table of Contents
 
-This is a starter project to help you get started with developing a RAG research agent using [LangGraph](https://github.com/langchain-ai/langgraph) in [LangGraph Studio](https://github.com/langchain-ai/langgraph-studio).
+- [Description](#description)
+- [Tech Stack](#tech-stack)
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [Dependencies](#dependencies)
+- [Contribution Guide](#contribution-guide)
+- [Deployment](#deployment)
+- [Troubleshooting](#troubleshooting)
+- [Security](#security)
+- [License](#license)
 
-![Graph view in LangGraph studio UI](./static/studio_ui.png)
+## Description
 
-## What it does
+The RAG Intelligence Agent is a comprehensive starter template designed to help developers build sophisticated retrieval-augmented generation systems using LangGraph and LangGraph Studio. It features a modular architecture with three main graph components:
 
-This project has three graphs:
+1. **Index Graph** - Manages document indexing and storage into vector databases
+2. **Retrieval Graph** - Handles conversational interactions with query routing and response generation
+3. **Researcher Subgraph** - Conducts multi-step research by generating and executing search queries
 
-* an "index" graph (`src/index_graph/graph.py`)
-* a "retrieval" graph (`src/retrieval_graph/graph.py`)
-* a "researcher" subgraph (part of the retrieval graph) (`src/retrieval_graph/researcher_graph/graph.py`)
+The system is designed to work with various LLM providers (Anthropic, OpenAI, Fireworks) and multiple vector store backends (Elasticsearch, MongoDB, Pinecone), making it highly flexible and scalable for diverse deployment scenarios.
 
-The index graph takes in document objects indexes them.
+### Key Capabilities
 
-```json
-[{ "page_content": "LangGraph is a library for building stateful, multi-actor applications with LLMs, used to create agent and multi-agent workflows." }]
+- **Multi-step Research**: Automatically creates and executes research plans based on user queries
+- **Smart Query Routing**: Classifies incoming queries and routes them to appropriate handlers
+- **Conversational Context**: Maintains chat history for coherent multi-turn conversations
+- **Flexible Backends**: Supports multiple LLM and vector store providers
+- **Graph-based Workflow**: Leverages LangGraph for stateful, multi-actor applications
+- **Studio Integration**: Full compatibility with LangGraph Studio for visual graph development and debugging
+
+## Tech Stack
+
+### Core Framework
+- **LangGraph** (>= 0.2.6) - Graph-based orchestration for AI workflows
+- **LangChain** (>= 0.2.14) - Building blocks for LLM applications
+- **LangChain OpenAI** (>= 0.1.22) - OpenAI integration
+- **LangChain Anthropic** (>= 0.1.23) - Anthropic Claude integration
+- **LangChain Fireworks** (>= 0.1.7) - Fireworks AI integration
+
+### Vector Stores & Retrieval
+- **LangChain Elasticsearch** (>= 0.2.2, < 0.3.0) - Elastic vector search
+- **LangChain MongoDB** (>= 0.1.9) - MongoDB Atlas integration
+- **LangChain Pinecone** (>= 0.1.3, < 0.2.0) - Pinecone serverless
+- **LangChain Cohere** (>= 0.2.4) - Cohere embeddings
+
+### Utilities
+- **Python-dotenv** (>= 1.0.1) - Environment variable management
+- **msgspec** (>= 0.18.6) - Fast serialization
+
+### Development Tools
+- **mypy** (>= 1.11.1) - Static type checking
+- **ruff** (>= 0.6.1) - Fast Python linter and formatter
+- **pytest** - Testing framework
+- **pytest-watch** - Test automation
+
+## Features
+
+### Intelligent Query Processing
+
+- **Query Classification**: Analyzes user queries to determine routing:
+  - LangChain-specific queries trigger research plans
+  - Ambiguous queries prompt for clarification
+  - General queries receive direct responses
+
+- **Dynamic Research Plans**: For LangChain queries, generates step-by-step research plans that break down complex questions into manageable research steps
+
+### Multi-Provider Support
+
+**Language Models:**
+- Anthropic Claude (1.2, 2.0, 2.1, 3-opus, 3-sonnet, 3.5-sonnet, 3-haiku)
+- OpenAI GPT (3.5-turbo, 4, 4-turbo, 4o, 4o-mini)
+- Fireworks AI models
+
+**Embedding Models:**
+- OpenAI text-embedding (ada-002, 3-small, 3-large)
+- Cohere embeddings (multiple variants for different languages)
+
+**Vector Stores:**
+- Elasticsearch (local, Elastic Cloud, serverless)
+- MongoDB Atlas Vector Search
+- Pinecone Serverless
+- Local Elasticsearch with Docker
+
+### Conversational Intelligence
+
+- **Chat History Management**: Maintains full conversation context
+- **Multi-turn Interactions**: Handles follow-up questions with awareness of previous context
+- **Document-aware Responses**: Generates responses based on retrieved documents
+- **Flexible Prompting**: Customizable system prompts for different use cases
+
+### Developer Experience
+
+- **Visual Graph Development**: Edit graphs in LangGraph Studio
+- **Hot Reload**: Auto-apply local changes during development
+- **State Inspection**: Debug by editing past state and re-running
+- **LangSmith Integration**: Built-in tracing and monitoring
+
+## Project Structure
+
+```
+rag-intelligence-agent/
+├── src/
+│   ├── index_graph/
+│   │   ├── __init__.py
+│   │   ├── graph.py              # Index graph definition
+│   │   ├── state.py              # State definitions
+│   │   └── configuration.py       # Configuration schema
+│   ├── retrieval_graph/
+│   │   ├── __init__.py
+│   │   ├── graph.py              # Main retrieval graph
+│   │   ├── state.py              # State definitions
+│   │   ├── configuration.py       # Configuration schema
+│   │   ├── prompts.py            # System and user prompts
+│   │   └── researcher_graph/
+│   │       ├── __init__.py
+│   │       ├── graph.py          # Researcher subgraph
+│   │       └── state.py          # Researcher state
+│   └── shared/
+│       ├── __init__.py
+│       ├── configuration.py       # Shared configurations
+│       ├── state.py              # Shared state types
+│       ├── retrieval.py          # Retrieval implementations
+│       └── utils.py              # Utility functions
+├── tests/
+│   ├── unit_tests/
+│   │   ├── __init__.py
+│   │   └── test_configuration.py
+│   └── integration_tests/
+│       ├── __init__.py
+│       └── test_graph.py
+├── static/
+│   └── studio_ui.png             # UI screenshots
+├── .github/
+│   └── workflows/
+│       ├── unit-tests.yml        # CI/CD for unit tests
+│       └── integration-tests.yml # CI/CD for integration tests
+├── .env.example                  # Environment template
+├── .gitignore
+├── .codespellignore
+├── langgraph.json               # LangGraph Studio config
+├── Makefile                      # Development commands
+├── pyproject.toml               # Project metadata
+├── LICENSE                       # MIT License
+└── README.md                     # This file
 ```
 
-If an empty list is provided (default), a list of sample documents from `src/sample_docs.json` is indexed instead. Those sample documents are based on the conceptual guides for LangChain and LangGraph.
+### Key Files
 
-The retrieval graph manages a chat history and responds based on the fetched documents. Specifically, it:
+| File | Purpose |
+|------|---------|
+| `src/index_graph/graph.py` | Handles document indexing into vector stores |
+| `src/retrieval_graph/graph.py` | Main graph orchestrating query routing and responses |
+| `src/retrieval_graph/researcher_graph/graph.py` | Subgraph for multi-step research execution |
+| `src/shared/retrieval.py` | Vector store initialization and retrieval logic |
+| `src/shared/utils.py` | Utility functions (model loading, document formatting) |
+| `langgraph.json` | Specifies graphs available in LangGraph Studio |
 
-1. Takes a user **query** as input
-2. Analyzes the query and determines how to route it:
-- if the query is about "LangChain", it creates a research plan based on the user's query and passes the plan to the researcher subgraph
-- if the query is ambiguous, it asks for more information
-- if the query is general (unrelated to LangChain), it lets the user know
-3. If the query is about "LangChain", the researcher subgraph runs for each step in the research plan, until no more steps are left:
-- it first generates a list of queries based on the step
-- it then retrieves the relevant documents in parallel for all queries and return the documents to the retrieval graph
-4. Finally, the retrieval graph generates a response based on the retrieved documents and the conversation context
+## Installation
 
-## Getting Started
+### Prerequisites
 
-Assuming you have already [installed LangGraph Studio](https://github.com/langchain-ai/langgraph-studio?tab=readme-ov-file#download), to set up:
+- Python 3.9 or higher
+- pip or [uv](https://astral.sh/uv/) package manager
+- Access to at least one LLM API (Anthropic, OpenAI, or Fireworks)
+- Access to at least one vector store (Elasticsearch, MongoDB, or Pinecone)
 
-1. Create a `.env` file.
+### Setup Steps
+
+1. **Clone the repository**
+
+```bash
+git clone https://github.com/Tanushh18/rag-intelligence-agent.git
+cd rag-intelligence-agent
+```
+
+2. **Create a Python virtual environment**
+
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+3. **Install dependencies**
+
+```bash
+# Using pip
+pip install -e ".[dev]"
+
+# Or using uv (faster)
+uv pip install -e ".[dev]"
+```
+
+4. **Configure environment variables**
 
 ```bash
 cp .env.example .env
 ```
 
-2. Select your retriever & index, and save the access instructions to your `.env` file.
+Edit `.env` with your API keys and configuration (see [Configuration](#configuration) section).
 
-<!--
-Setup instruction auto-generated by `langgraph template lock`. DO NOT EDIT MANUALLY.
--->
+5. **Install LangGraph Studio** (optional, for visual development)
 
-### Setup Retriever
+Download from [LangGraph Studio](https://github.com/langchain-ai/langgraph-studio)
 
-The defaults values for `retriever_provider` are shown below:
+## Usage
 
-```yaml
-retriever_provider: elastic-local
+### Basic Workflow
+
+#### 1. Index Documents
+
+Open LangGraph Studio or use the Python API to invoke the indexer:
+
+```python
+from index_graph import graph as indexer
+
+# Index with default sample documents
+result = await indexer.ainvoke({
+    "docs": [],  # Empty uses sample docs from LangChain documentation
+})
+
+# Or index with custom documents
+custom_docs = [
+    {"page_content": "Your document content here"},
+    {"page_content": "Another document"}
+]
+result = await indexer.ainvoke({"docs": custom_docs})
 ```
 
-Follow the instructions below to get set up, or pick one of the additional options.
+#### 2. Query Documents
+
+Use the retrieval graph for conversational interactions:
+
+```python
+from retrieval_graph import graph as retrieval
+
+# Single query
+response = await retrieval.ainvoke({
+    "messages": [
+        {"role": "user", "content": "What is LangGraph?"}
+    ]
+})
+
+# Multi-turn conversation
+messages = [
+    {"role": "user", "content": "What is LangGraph?"},
+    {"role": "assistant", "content": "LangGraph is..."},
+    {"role": "user", "content": "How does it compare to LangChain?"}
+]
+response = await retrieval.ainvoke({"messages": messages})
+```
+
+### LangGraph Studio Workflow
+
+1. Open LangGraph Studio
+2. Select "indexer" from dropdown → invoke with empty input to load sample documents
+3. Switch to "retrieval_graph" → ask questions about LangChain/LangGraph
+4. Use the visual interface to:
+   - Edit state at checkpoints
+   - Re-run from previous states for debugging
+   - Modify prompts in real-time
+   - View streaming responses
+
+### Making Development Changes
+
+Local changes are automatically applied via hot reload:
+
+1. Modify graph definitions or prompts
+2. See changes reflected immediately in Studio
+3. Create new threads with `+` button to test variations
+4. Use LangSmith integration for production tracing
+
+## Configuration
+
+Configuration is managed through environment variables and configuration classes. Each graph has a `Configuration` class in `configuration.py`.
+
+### Environment Variables
+
+Create `.env` file (copy from `.env.example`):
+
+```bash
+# LangSmith (optional, for tracing)
+LANGSMITH_PROJECT=rag-research-agent
+
+# LLM Selection - Choose at least one
+ANTHROPIC_API_KEY=your-key-here
+OPENAI_API_KEY=your-key-here
+FIREWORKS_API_KEY=your-key-here
+```
+
+### Vector Store Configuration
 
 #### Elasticsearch
 
-Elasticsearch (as provided by Elastic) is an open source distributed search and analytics engine, scalable data store and vector database optimized for speed and relevance on production-scale workloads.
+**Elasticsearch Serverless (14-day free trial):**
 
-##### Setup Elasticsearch
-Elasticsearch can be configured as the knowledge base provider for a retrieval agent by being deployed on Elastic Cloud (either as a hosted deployment or serverless project) or on your local environment.
-
-**Elasticsearch Serverless**
-
-1. Signup for a free 14 day trial with [Elasticsearch Serverless](https://cloud.elastic.co/registration?onboarding_token=search&cta=cloud-registration&tech=trial&plcmt=article%20content&pg=langchain).
-2. Get the Elasticsearch URL, found on home under "Copy your connection details".
-3. Create an API key found on home under "API Key".
-4. Copy the URL and API key to your `.env` file created above:
-
-```
-ELASTICSEARCH_URL=<ES_URL>
-ELASTICSEARCH_API_KEY=<API_KEY>
+```bash
+# Sign up: https://cloud.elastic.co/
+ELASTICSEARCH_URL=<your-serverless-url>
+ELASTICSEARCH_API_KEY=<your-api-key>
 ```
 
-**Elastic Cloud**
+**Elastic Cloud:**
 
-1. Signup for a free 14 day trial with [Elastic Cloud](https://cloud.elastic.co/registration?onboarding_token=search&cta=cloud-registration&tech=trial&plcmt=article%20content&pg=langchain).
-2. Get the Elasticsearch URL, found under Applications of your deployment.
-3. Create an API key. See the [official elastic documentation](https://www.elastic.co/search-labs/tutorials/install-elasticsearch/elastic-cloud#creating-an-api-key) for more information.
-4. Copy the URL and API key to your `.env` file created above:
+```bash
+ELASTICSEARCH_URL=<your-cloud-url>
+ELASTICSEARCH_API_KEY=<your-api-key>
+```
 
-```
-ELASTICSEARCH_URL=<ES_URL>
-ELASTICSEARCH_API_KEY=<API_KEY>
-```
-**Local Elasticsearch (Docker)**
+**Local Docker:**
 
-```
+```bash
 docker run \
   -p 127.0.0.1:9200:9200 \
   -d \
@@ -105,626 +327,415 @@ docker run \
   -e "xpack.security.http.ssl.enabled=false" \
   -e "xpack.license.self_generated.type=trial" \
   docker.elastic.co/elasticsearch/elasticsearch:8.15.1
-```
 
-See the [official Elastic documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/run-elasticsearch-locally.html) for more information on running it locally.
-
-Then populate the following in your `.env` file:
-
-```
-# As both Elasticsearch and LangGraph Studio runs in Docker, we need to use host.docker.internal to access.
-
+# In .env:
 ELASTICSEARCH_URL=http://host.docker.internal:9200
 ELASTICSEARCH_USER=elastic
 ELASTICSEARCH_PASSWORD=changeme
 ```
+
 #### MongoDB Atlas
 
-MongoDB Atlas is a fully-managed cloud database that includes vector search capabilities for AI-powered applications.
+1. Create free account at https://www.mongodb.com/cloud/atlas
+2. Create cluster and database
+3. Create vector search index on `langgraph_retrieval_agent.default` collection
+4. Get connection string from Atlas dashboard
 
-1. Create a free Atlas cluster:
-- Go to the [MongoDB Atlas website](https://www.mongodb.com/cloud/atlas/register) and sign up for a free account.
-- After logging in, create a free cluster by following the on-screen instructions.
-
-2. Create a vector search index
-- Follow the instructions at [the Mongo docs](https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-search-type/)
-- By default, we use the collection `langgraph_retrieval_agent.default` - create the index there
-- Add an indexed filter for path `user_id`
-- **IMPORTANT**: select Atlas Vector Search NOT Atlas Search when creating the index
-Your final JSON editor configuration should look something like the following:
-
-```json
-{
-  "fields": [
-    {
-      "numDimensions": 1536,
-      "path": "embedding",
-      "similarity": "cosine",
-      "type": "vector"
-    }
-  ]
-}
+```bash
+MONGODB_URI=mongodb+srv://user:password@cluster.mongodb.net/?retryWrites=true&w=majority
 ```
 
-The exact numDimensions may differ if you select a different embedding model.
-
-2. Set up your environment:
-- In the Atlas dashboard, click on "Connect" for your cluster.
-- Choose "Connect your application" and copy the provided connection string.
-- Create a `.env` file in your project root if you haven't already.
-- Add your MongoDB Atlas connection string to the `.env` file:
-
-```
-MONGODB_URI="mongodb+srv://username:password@your-cluster-url.mongodb.net/?retryWrites=true&w=majority&appName=your-cluster-name"
-```
-
-Replace `username`, `password`, `your-cluster-url`, and `your-cluster-name` with your actual credentials and cluster information.
 #### Pinecone Serverless
 
-Pinecone is a managed, cloud-native vector database that provides long-term memory for high-performance AI applications.
+1. Sign up at https://login.pinecone.io/
+2. Create serverless index (1536 dimensions for OpenAI embeddings)
+3. Generate API key
 
-1. Sign up for a Pinecone account at [https://login.pinecone.io/login](https://login.pinecone.io/login) if you haven't already.
-
-2. After logging in, generate an API key from the Pinecone console.
-
-3. Create a serverless index:
-   - Choose a name for your index (e.g., "example-index")
-   - Set the dimension based on your embedding model (e.g., 1536 for OpenAI embeddings)
-   - Select "cosine" as the metric
-   - Choose "Serverless" as the index type
-   - Select your preferred cloud provider and region (e.g., AWS us-east-1)
-
-4. Once you have created your index and obtained your API key, add them to your `.env` file:
-
-```
+```bash
 PINECONE_API_KEY=your-api-key
 PINECONE_INDEX_NAME=your-index-name
 ```
 
+### Model Configuration
 
-### Setup Model
+In LangGraph Studio, configure these parameters:
 
-The defaults values for `response_model`, `query_model` are shown below:
+| Parameter | Default | Options |
+|-----------|---------|---------|
+| `response_model` | anthropic/claude-3-5-sonnet-20240620 | Claude, GPT-4, GPT-4o variants |
+| `query_model` | anthropic/claude-3-haiku-20240307 | Claude, GPT-3.5-turbo, GPT-4 variants |
+| `embedding_model` | openai/text-embedding-3-small | OpenAI, Cohere embeddings |
+| `retriever_provider` | elastic-local | elastic, elastic-local, mongodb, pinecone |
 
-```yaml
-response_model: anthropic/claude-3-5-sonnet-20240620
-query_model: anthropic/claude-3-haiku-20240307
-```
+### Customization Options
 
-Follow the instructions below to get set up, or pick one of the additional options.
+1. **Change Retriever**: Switch `retriever_provider` between providers
+2. **Modify Embedding Model**: Update `embedding_model` in configuration
+3. **Adjust Search Parameters**: Modify `search_kwargs` for retrieval behavior
+4. **Customize Responses**: Edit `response_system_prompt`
+5. **Update Prompts**: Modify prompts in `src/retrieval_graph/prompts.py`:
+   - `research_plan_system_prompt` - For research planning
+   - `generate_queries_system_prompt` - For query generation
+6. **Change LLM**: Update `response_model` and `query_model`
+7. **Extend Graph**: Add nodes/edges in `src/retrieval_graph/graph.py`
+8. **Add Tools**: Implement new tools in researcher graph
 
-#### Anthropic
+## Dependencies
 
-To use Anthropic's chat models:
+### Core Dependencies
 
-1. Sign up for an [Anthropic API key](https://console.anthropic.com/) if you haven't already.
-2. Once you have your API key, add it to your `.env` file:
+| Package | Version | Purpose |
+|---------|---------|---------|
+| langgraph | >= 0.2.6 | Graph-based AI orchestration |
+| langchain | >= 0.2.14 | LLM framework |
+| langchain-openai | >= 0.1.22 | OpenAI integration |
+| langchain-anthropic | >= 0.1.23 | Anthropic Claude integration |
+| langchain-fireworks | >= 0.1.7 | Fireworks AI integration |
+| python-dotenv | >= 1.0.1 | Environment management |
+| msgspec | >= 0.18.6 | Serialization |
 
-```
-ANTHROPIC_API_KEY=your-api-key
-```
-#### OpenAI
+### Vector Store Adapters
 
-To use OpenAI's chat models:
+| Package | Version | Vector Store |
+|---------|---------|--------------|
+| langchain-elasticsearch | 0.2.2 - 0.3.0 | Elasticsearch |
+| langchain-mongodb | >= 0.1.9 | MongoDB Atlas |
+| langchain-pinecone | 0.1.3 - 0.2.0 | Pinecone |
+| langchain-cohere | >= 0.2.4 | Cohere embeddings |
 
-1. Sign up for an [OpenAI API key](https://platform.openai.com/signup).
-2. Once you have your API key, add it to your `.env` file:
-```
-OPENAI_API_KEY=your-api-key
-```
+### Development Dependencies
 
+| Package | Version | Purpose |
+|---------|---------|---------|
+| mypy | >= 1.11.1 | Static type checking |
+| ruff | >= 0.6.1 | Linting & formatting |
+| pytest | Latest | Testing |
+| pytest-watch | Latest | Test automation |
 
+## Contribution Guide
 
-### Setup Embedding Model
-
-The defaults values for `embedding_model` are shown below:
-
-```yaml
-embedding_model: openai/text-embedding-3-small
-```
-
-Follow the instructions below to get set up, or pick one of the additional options.
-
-#### OpenAI
-
-To use OpenAI's embeddings:
-
-1. Sign up for an [OpenAI API key](https://platform.openai.com/signup).
-2. Once you have your API key, add it to your `.env` file:
-```
-OPENAI_API_KEY=your-api-key
-```
-
-#### Cohere
-
-To use Cohere's embeddings:
-
-1. Sign up for a [Cohere API key](https://dashboard.cohere.com/welcome/register).
-2. Once you have your API key, add it to your `.env` file:
+### Development Setup
 
 ```bash
-COHERE_API_KEY=your-api-key
+# Create fork and clone
+git clone https://github.com/YOUR-USERNAME/rag-intelligence-agent.git
+cd rag-intelligence-agent
+
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate
+
+# Install with dev dependencies
+pip install -e ".[dev]"
 ```
 
+### Code Standards
 
+- **Format Code**: `make format`
+- **Run Linting**: `make lint`
+- **Type Checking**: mypy (strict mode enforced)
+- **Spell Check**: `make spell_check`
 
+### Testing
 
+```bash
+# Run unit tests
+make test
 
-<!--
-End setup instructions
--->
+# Run specific test file
+make test TEST_FILE=tests/unit_tests/test_configuration.py
 
-## Using
+# Watch mode (auto-rerun on changes)
+make test_watch
 
-Once you've set up your retriever and saved your model secrets, it's time to try it out! First, let's add some information to the index. Open studio, select the "indexer" graph from the dropdown in the top-left, and then add some content to chat over. You can just invoke it with an empty list (default) to index sample documents from LangChain and LangGraph documentation.
+# Integration tests
+make integration_tests
 
-You'll know that the indexing is complete when the indexer "delete"'s the content from its graph memory (since it's been persisted in your configured storage provider).
+# Coverage profiling
+make test_profile
+```
 
-Next, open the "retrieval_graph" using the dropdown in the top-left. Ask it questions about LangChain to confirm it can fetch the required information!
+### Commit Guidelines
 
-## How to customize
+1. Create feature branch: `git checkout -b feature/description`
+2. Make changes and test thoroughly
+3. Format and lint: `make format lint`
+4. Commit with descriptive message
+5. Push to fork: `git push origin feature/description`
+6. Create pull request with:
+   - Clear title and description
+   - Reference to related issues
+   - Explanation of changes
 
-You can customize this retrieval agent template in several ways:
+### Pull Request Process
 
-1. **Change the retriever**: You can switch between different vector stores (Elasticsearch, MongoDB, Pinecone) by modifying the `retriever_provider` in the configuration. Each provider has its own setup instructions in the "Getting Started" section above.
+1. Ensure all tests pass locally
+2. Update documentation if needed
+3. Add tests for new functionality
+4. Ensure code is properly formatted
+5. Request review from maintainers
 
-2. **Modify the embedding model**: You can change the embedding model used for document indexing and query embedding by updating the `embedding_model` in the configuration. Options include various OpenAI and Cohere models.
+## Deployment
 
-3. **Adjust search parameters**: Fine-tune the retrieval process by modifying the `search_kwargs` in the configuration. This allows you to control aspects like the number of documents retrieved or similarity thresholds.
+### Local Development
 
-4. **Customize the response generation**: You can modify the `response_system_prompt` to change how the agent formulates its responses. This allows you to adjust the agent's personality or add specific instructions for answer generation.
+```bash
+# Using LangGraph Studio (recommended)
+# - Open Studio
+# - Load project: Open in - LangGraph Studio
 
-5. **Modify prompts**: Update the prompts used for user query routing, research planning, query generation and more in `src/retrieval_graph/prompts.py` to better suit your specific use case or to improve the agent's performance. You can also modify these directly in LangGraph Studio. For example, you can:
+# Using Python directly
+python -c "
+from retrieval_graph import graph as retrieval
+import asyncio
 
-  * Modify system prompt for creating research plan (`research_plan_system_prompt`)
-  * Modify system prompt for generating search queries based on the research plan (`generate_queries_system_prompt`)
+async def main():
+    response = await retrieval.ainvoke({
+        'messages': [{'role': 'user', 'content': 'What is LangGraph?'}]
+    })
+    print(response)
 
-6. **Change the language model**: Update the `response_model` in the configuration to use different language models for response generation. Options include various Claude models from Anthropic, as well as models from other providers like Fireworks AI.
+asyncio.run(main())
+"
+```
 
-7. **Extend the graph**: You can add new nodes or modify existing ones in the `src/retrieval_graph/graph.py` file to introduce additional processing steps or decision points in the agent's workflow.
+### Docker Deployment
 
-8. **Add tools**: Implement tools to expand the researcher agent's capabilities beyond simple retrieval generation.
+For containerized deployment with dependencies:
 
-Remember to test your changes thoroughly to ensure they improve the agent's performance for your specific use case.
+```dockerfile
+FROM python:3.11-slim
 
-## Development
+WORKDIR /app
 
-While iterating on your graph, you can edit past state and rerun your app from past states to debug specific nodes. Local changes will be automatically applied via hot reload. Try adding an interrupt before the agent calls the researcher subgraph, updating the default system message in `src/retrieval_graph/prompts.py` to take on a persona, or adding additional nodes and edges!
+# Copy project
+COPY . .
 
-Follow up requests will be appended to the same thread. You can create an entirely new thread, clearing previous history, using the `+` button in the top right.
+# Install dependencies
+RUN pip install -e .
 
-You can find the latest (under construction) docs on [LangGraph](https://github.com/langchain-ai/langgraph) here, including examples and other references. Using those guides can help you pick the right patterns to adapt here for your use case.
+# Set environment (from mounted secrets)
+ENV PYTHONUNBUFFERED=1
 
-LangGraph Studio also integrates with [LangSmith](https://smith.langchain.com/) for more in-depth tracing and collaboration with teammates.
+# Run with your orchestration tool
+CMD ["python", "-c", "...your-invocation..."]
+```
 
-<!--
-Configuration auto-generated by `langgraph template lock`. DO NOT EDIT MANUALLY.
-{
-  "config_schemas": {
-    "indexer": {
-      "type": "object",
-      "properties": {
-        "embedding_model": {
-          "type": "string",
-          "default": "openai/text-embedding-3-small",
-          "description": "Name of the embedding model to use. Must be a valid embedding model name.",
-          "environment": [
-            {
-              "value": "cohere/embed-english-light-v2.0",
-              "variables": "COHERE_API_KEY"
-            },
-            {
-              "value": "cohere/embed-english-light-v3.0",
-              "variables": "COHERE_API_KEY"
-            },
-            {
-              "value": "cohere/embed-english-v2.0",
-              "variables": "COHERE_API_KEY"
-            },
-            {
-              "value": "cohere/embed-english-v3.0",
-              "variables": "COHERE_API_KEY"
-            },
-            {
-              "value": "cohere/embed-multilingual-light-v3.0",
-              "variables": "COHERE_API_KEY"
-            },
-            {
-              "value": "cohere/embed-multilingual-v2.0",
-              "variables": "COHERE_API_KEY"
-            },
-            {
-              "value": "cohere/embed-multilingual-v3.0",
-              "variables": "COHERE_API_KEY"
-            },
-            {
-              "value": "openai/text-embedding-3-large",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/text-embedding-3-small",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/text-embedding-ada-002",
-              "variables": "OPENAI_API_KEY"
-            }
-          ]
-        },
-        "retriever_provider": {
-          "enum": [
-            "elastic-local",
-            "elastic",
-            "mongodb",
-            "pinecone"
-          ],
-          "default": "elastic-local",
-          "description": "The vector store provider to use for retrieval. Options are 'elastic', 'pinecone', or 'mongodb'.",
-          "environment": [
-            {
-              "value": "elastic",
-              "variables": [
-                "ELASTICSEARCH_URL",
-                "ELASTICSEARCH_API_KEY"
-              ]
-            },
-            {
-              "value": "elastic-local",
-              "variables": [
-                "ELASTICSEARCH_URL",
-                "ELASTICSEARCH_USER",
-                "ELASTICSEARCH_PASSWORD"
-              ]
-            },
-            {
-              "value": "mongodb",
-              "variables": [
-                "MONGODB_URI"
-              ]
-            },
-            {
-              "value": "pinecone",
-              "variables": [
-                "PINECONE_API_KEY",
-                "PINECONE_INDEX_NAME"
-              ]
-            }
-          ],
-          "type": "string"
-        }
-      }
-    },
-    "retrieval_graph": {
-      "type": "object",
-      "properties": {
-        "embedding_model": {
-          "type": "string",
-          "default": "openai/text-embedding-3-small",
-          "description": "Name of the embedding model to use. Must be a valid embedding model name.",
-          "environment": [
-            {
-              "value": "cohere/embed-english-light-v2.0",
-              "variables": "COHERE_API_KEY"
-            },
-            {
-              "value": "cohere/embed-english-light-v3.0",
-              "variables": "COHERE_API_KEY"
-            },
-            {
-              "value": "cohere/embed-english-v2.0",
-              "variables": "COHERE_API_KEY"
-            },
-            {
-              "value": "cohere/embed-english-v3.0",
-              "variables": "COHERE_API_KEY"
-            },
-            {
-              "value": "cohere/embed-multilingual-light-v3.0",
-              "variables": "COHERE_API_KEY"
-            },
-            {
-              "value": "cohere/embed-multilingual-v2.0",
-              "variables": "COHERE_API_KEY"
-            },
-            {
-              "value": "cohere/embed-multilingual-v3.0",
-              "variables": "COHERE_API_KEY"
-            },
-            {
-              "value": "openai/text-embedding-3-large",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/text-embedding-3-small",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/text-embedding-ada-002",
-              "variables": "OPENAI_API_KEY"
-            }
-          ]
-        },
-        "retriever_provider": {
-          "enum": [
-            "elastic-local",
-            "elastic",
-            "mongodb",
-            "pinecone"
-          ],
-          "default": "elastic-local",
-          "description": "The vector store provider to use for retrieval. Options are 'elastic', 'pinecone', or 'mongodb'.",
-          "environment": [
-            {
-              "value": "elastic",
-              "variables": [
-                "ELASTICSEARCH_URL",
-                "ELASTICSEARCH_API_KEY"
-              ]
-            },
-            {
-              "value": "elastic-local",
-              "variables": [
-                "ELASTICSEARCH_URL",
-                "ELASTICSEARCH_USER",
-                "ELASTICSEARCH_PASSWORD"
-              ]
-            },
-            {
-              "value": "mongodb",
-              "variables": [
-                "MONGODB_URI"
-              ]
-            },
-            {
-              "value": "pinecone",
-              "variables": [
-                "PINECONE_API_KEY",
-                "PINECONE_INDEX_NAME"
-              ]
-            }
-          ],
-          "type": "string"
-        },
-        "response_model": {
-          "type": "string",
-          "default": "anthropic/claude-3-5-sonnet-20240620",
-          "description": "The language model used for generating responses. Should be in the form: provider/model-name.",
-          "environment": [
-            {
-              "value": "anthropic/claude-1.2",
-              "variables": "ANTHROPIC_API_KEY"
-            },
-            {
-              "value": "anthropic/claude-2.0",
-              "variables": "ANTHROPIC_API_KEY"
-            },
-            {
-              "value": "anthropic/claude-2.1",
-              "variables": "ANTHROPIC_API_KEY"
-            },
-            {
-              "value": "anthropic/claude-3-5-sonnet-20240620",
-              "variables": "ANTHROPIC_API_KEY"
-            },
-            {
-              "value": "anthropic/claude-3-haiku-20240307",
-              "variables": "ANTHROPIC_API_KEY"
-            },
-            {
-              "value": "anthropic/claude-3-opus-20240229",
-              "variables": "ANTHROPIC_API_KEY"
-            },
-            {
-              "value": "anthropic/claude-3-sonnet-20240229",
-              "variables": "ANTHROPIC_API_KEY"
-            },
-            {
-              "value": "anthropic/claude-instant-1.2",
-              "variables": "ANTHROPIC_API_KEY"
-            },
-            {
-              "value": "openai/gpt-3.5-turbo",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-3.5-turbo-0125",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-3.5-turbo-0301",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-3.5-turbo-0613",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-3.5-turbo-1106",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-3.5-turbo-16k",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-3.5-turbo-16k-0613",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-4",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-4-0125-preview",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-4-0314",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-4-0613",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-4-1106-preview",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-4-32k",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-4-32k-0314",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-4-32k-0613",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-4-turbo",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-4-turbo-preview",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-4-vision-preview",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-4o",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-4o-mini",
-              "variables": "OPENAI_API_KEY"
-            }
-          ]
-        },
-        "query_model": {
-          "type": "string",
-          "default": "anthropic/claude-3-haiku-20240307",
-          "description": "The language model used for processing and refining queries. Should be in the form: provider/model-name.",
-          "environment": [
-            {
-              "value": "anthropic/claude-1.2",
-              "variables": "ANTHROPIC_API_KEY"
-            },
-            {
-              "value": "anthropic/claude-2.0",
-              "variables": "ANTHROPIC_API_KEY"
-            },
-            {
-              "value": "anthropic/claude-2.1",
-              "variables": "ANTHROPIC_API_KEY"
-            },
-            {
-              "value": "anthropic/claude-3-5-sonnet-20240620",
-              "variables": "ANTHROPIC_API_KEY"
-            },
-            {
-              "value": "anthropic/claude-3-haiku-20240307",
-              "variables": "ANTHROPIC_API_KEY"
-            },
-            {
-              "value": "anthropic/claude-3-opus-20240229",
-              "variables": "ANTHROPIC_API_KEY"
-            },
-            {
-              "value": "anthropic/claude-3-sonnet-20240229",
-              "variables": "ANTHROPIC_API_KEY"
-            },
-            {
-              "value": "anthropic/claude-instant-1.2",
-              "variables": "ANTHROPIC_API_KEY"
-            },
-            {
-              "value": "openai/gpt-3.5-turbo",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-3.5-turbo-0125",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-3.5-turbo-0301",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-3.5-turbo-0613",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-3.5-turbo-1106",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-3.5-turbo-16k",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-3.5-turbo-16k-0613",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-4",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-4-0125-preview",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-4-0314",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-4-0613",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-4-1106-preview",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-4-32k",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-4-32k-0314",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-4-32k-0613",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-4-turbo",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-4-turbo-preview",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-4-vision-preview",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-4o",
-              "variables": "OPENAI_API_KEY"
-            },
-            {
-              "value": "openai/gpt-4o-mini",
-              "variables": "OPENAI_API_KEY"
-            }
-          ]
-        }
-      }
-    }
-  }
+### Cloud Deployment
+
+**LangGraph Cloud** (Recommended):
+
+1. Push code to GitHub
+2. Link repository to LangGraph Cloud
+3. Set environment variables in Cloud console
+4. Deploy with one click
+
+**Other Platforms** (AWS, GCP, Azure):
+
+1. Use Docker deployment approach
+2. Configure environment secrets
+3. Set up API gateway/load balancer
+4. Configure monitoring and logging
+
+### Production Checklist
+
+- [ ] All environment variables set securely
+- [ ] Vector database sized appropriately
+- [ ] LLM rate limits configured
+- [ ] LangSmith tracing enabled for monitoring
+- [ ] Logging configured for debugging
+- [ ] Error handling and retries implemented
+- [ ] Load testing completed
+- [ ] Backup strategy for indexed documents
+
+## Troubleshooting
+
+### Common Issues
+
+#### 1. API Key Errors
+
+**Problem**: `AuthenticationError` or `Invalid API key`
+
+**Solution**:
+```bash
+# Verify .env file exists and has correct keys
+cat .env
+
+# Check key format (no extra spaces or quotes)
+export ANTHROPIC_API_KEY="your-key-here"
+
+# Test connection
+python -c "from langchain_anthropic import ChatAnthropic; ChatAnthropic()"
+```
+
+#### 2. Vector Store Connection Failures
+
+**Problem**: `ConnectionError` to Elasticsearch/MongoDB/Pinecone
+
+**Solution**:
+```bash
+# Check service is running
+# For Elasticsearch Docker:
+docker ps | grep elasticsearch
+
+# Verify connection string in .env
+# Test directly:
+curl http://localhost:9200  # Elasticsearch
+```
+
+#### 3. Module Import Errors
+
+**Problem**: `ModuleNotFoundError: No module named 'retrieval_graph'`
+
+**Solution**:
+```bash
+# Install in editable mode
+pip install -e .
+
+# Verify PYTHONPATH
+export PYTHONPATH=/path/to/src:$PYTHONPATH
+```
+
+#### 4. Graph Execution Timeouts
+
+**Problem**: Queries take too long to complete
+
+**Solution**:
+- Increase retrieval result count
+- Use faster embedding model (ada-002 → 3-small)
+- Check vector store performance
+- Review LangSmith traces for bottlenecks
+
+#### 5. Memory Issues with Large Documents
+
+**Problem**: OutOfMemory errors during indexing
+
+**Solution**:
+```bash
+# Batch indexing
+docs_batches = [docs[i:i+100] for i in range(0, len(docs), 100)]
+for batch in docs_batches:
+    await indexer.ainvoke({"docs": batch})
+```
+
+#### 6. LangGraph Studio Connection Issues
+
+**Problem**: Cannot connect to local development server
+
+**Solution**:
+```bash
+# Ensure Python virtual environment is active
+source venv/bin/activate
+
+# Check Python version (3.9+)
+python --version
+
+# Reinstall LangGraph
+pip install --force-reinstall langgraph
+```
+
+### Debug Mode
+
+Enable debug logging:
+
+```python
+import logging
+logging.basicConfig(level=logging.DEBUG)
+
+# Run your graph
+result = await graph.ainvoke(...)
+```
+
+### Performance Optimization
+
+1. **Caching**: Use LLM caching for repeated queries
+2. **Batch Processing**: Process documents in batches
+3. **Model Selection**: Use smaller models for queries (Haiku vs Sonnet)
+4. **Vector DB**: Tune search parameters in `search_kwargs`
+5. **Monitoring**: Use LangSmith to identify bottlenecks
+
+## Security
+
+### API Key Management
+
+- Never commit `.env` files to version control
+- Use environment variables in production
+- Rotate API keys regularly
+- Use separate keys for development/production
+
+### Data Privacy
+
+- Vector database contains document embeddings only
+- Original documents should be stored separately
+- Implement access controls on vector database
+- Consider data encryption at rest and in transit
+
+### Model Configuration
+
+- Use separate API keys for different environments
+- Implement rate limiting
+- Monitor for unusual usage patterns
+- Log all requests (respecting privacy regulations)
+
+### Dependencies
+
+- Keep dependencies updated: `pip install --upgrade`
+- Use pinned versions in production: `pip-compile`
+- Monitor security advisories: `safety check`
+- Review new dependency licenses
+
+### Best Practices
+
+1. Use service accounts instead of personal API keys
+2. Implement request signing and verification
+3. Use HTTPS for all communication
+4. Implement rate limiting and quotas
+5. Regular security audits of prompts
+6. Handle sensitive data carefully in prompts
+7. Test for prompt injection vulnerabilities
+8. Keep audit logs of system usage
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+### MIT License Summary
+
+- You can use this code freely in personal and commercial projects
+- You must include the original license and copyright notice
+- The code is provided "as-is" without warranty
+- The authors are not liable for any issues
+
+## Additional Resources
+
+- **LangGraph Documentation**: https://github.com/langchain-ai/langgraph
+- **LangChain Documentation**: https://python.langchain.com/
+- **LangGraph Studio**: https://github.com/langchain-ai/langgraph-studio
+- **LangSmith Tracing**: https://smith.langchain.com/
+- **Elasticsearch Guide**: https://www.elastic.co/guide/
+- **MongoDB Atlas Docs**: https://docs.mongodb.com/atlas/
+- **Pinecone Docs**: https://docs.pinecone.io/
+
+## Support & Community
+
+- **Issues**: Report bugs on GitHub Issues
+- **Discussions**: Ask questions in GitHub Discussions
+- **LangChain Community**: https://discord.gg/6adMQxSpJS
+
+## Citation
+
+If you use this template in your research or project, please cite:
+
+```bibtex
+@software{rag-intelligence-agent,
+  title={RAG Intelligence Agent},
+  author={Tanushh18},
+  url={https://github.com/Tanushh18/rag-intelligence-agent},
+  year={2024},
+  license={MIT}
 }
--->
+```
+
+---
+
+Built with LangGraph and LangChain | Last updated: 2024
